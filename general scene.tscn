@@ -1,0 +1,67 @@
+[gd_scene load_steps=9 format=3 uid="uid://dh3str2uwo7me"]
+
+[ext_resource type="Material" uid="uid://sac41ylaqv34" path="res://materials/grass material.tres" id="1_epm2d"]
+[ext_resource type="Material" uid="uid://dh60c0tx85ygs" path="res://materials/bus bench material.tres" id="2_jvcn4"]
+[ext_resource type="Script" path="res://camera_3d.gd" id="3_hqqfc"]
+
+[sub_resource type="Environment" id="Environment_bqtr4"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_i8g01"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_tbmkc"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_dvihy"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_v6mmj"]
+
+[node name="World" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 8, -9)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_bqtr4")
+
+[node name="grass" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="grass"]
+transform = Transform3D(10.023, 0, 0, 0, 1, 0, 0, 0, 9.97273, 0, 0, 0)
+material_override = ExtResource("1_epm2d")
+mesh = SubResource("PlaneMesh_i8g01")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="grass"]
+shape = SubResource("WorldBoundaryShape3D_tbmkc")
+
+[node name="bus bench" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.10317, 0, -8.71412)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="bus bench"]
+transform = Transform3D(6.07611, 0, 0, 0, 4.66593, 0, 0, 0, 1.57651, 0.765755, 2.20722, 0.181903)
+material_override = ExtResource("2_jvcn4")
+mesh = SubResource("BoxMesh_dvihy")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="bus bench"]
+transform = Transform3D(5.13795, 0, 0, 0, 5.13795, 0, 0, 0, 5.13795, 1.06124, 3.73837, 0.78192)
+shape = SubResource("BoxShape3D_v6mmj")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.54887, 0)
+script = ExtResource("3_hqqfc")
+
+[node name="MENU" type="VBoxContainer" parent="."]
+offset_right = 153.0
+offset_bottom = 220.0
+
+[node name="Teleport Button #1" type="Button" parent="MENU"]
+layout_mode = 2
+text = "Teleport Lane #1"
+
+[node name="Teleport Button #2" type="Button" parent="MENU"]
+layout_mode = 2
+text = "Teleport Lane #2"
+
+[node name="Teleport Button #3" type="Button" parent="MENU"]
+layout_mode = 2
+text = "Teleport Lane #3"
